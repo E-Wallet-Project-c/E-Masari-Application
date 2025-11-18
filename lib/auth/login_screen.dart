@@ -96,6 +96,11 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final primary = Theme.of(context).primaryColor;
 
+    final inputBorder = Theme.of(context).inputDecorationTheme.border;
+    final BorderRadius globalRadius = inputBorder is OutlineInputBorder
+        ? inputBorder.borderRadius
+        : BorderRadius.circular(15);
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -103,20 +108,18 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 100),
+              const SizedBox(height: 70),
 
-              const Center(
-                child: Text(
-                  'Masari',
-                  style: TextStyle(
-                    fontFamily: 'GreatVibes',
-                    fontSize: 50,
-                    color: Color(0xFF00A0E3),
-                  ),
+              Center(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 150,
+                  height: 150,
+                  fit: BoxFit.cover,
                 ),
               ),
 
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
 
               const Center(
                 child: Text('Welcome Back!', style: TextStyle(fontSize: 30)),
@@ -198,6 +201,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         ? const Color(0xFF005A8D)
                         : (_canSubmit ? primary : const Color(0xFFE0E0E0)),
                     disabledBackgroundColor: const Color(0xFFE0E0E0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          globalRadius, // نفس الزوايا تبعت الـ TextField
+                    ),
                   ),
                   child: _isLoading
                       ? const SizedBox(

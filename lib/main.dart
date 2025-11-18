@@ -19,15 +19,15 @@ class MasariApp extends StatelessWidget {
         fontFamily: 'Roboto',
         inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
             borderSide: BorderSide(color: Color(0xFFE0E0E0)),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
             borderSide: BorderSide(color: Color(0xFFE0E0E0)),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
             borderSide: BorderSide(color: Color(0xFF0094D9), width: 1.3),
           ),
           contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
