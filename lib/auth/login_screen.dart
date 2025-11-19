@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'createprofile_screen.dart';
+import 'package:masari/auth/RegisterScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -108,14 +108,13 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 70),
+            const SizedBox(height: 150),
 
             Center(
               child: Image.asset(
                 'assets/images/logo.png',
-                width: 150,
-                height: 150,
-                fit: BoxFit.cover,
+                width: 200,
+                height: 80,
               ),
             ),
 
@@ -238,9 +237,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => const createprofileScreen(),
-                      ),
+                      MaterialPageRoute(builder: (_) => const RegisterScreen()),
                     );
                   },
                   style: TextButton.styleFrom(
