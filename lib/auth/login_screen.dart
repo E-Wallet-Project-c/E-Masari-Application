@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:masari/auth/RegisterScreen.dart';
+import 'package:masari/auth/createprofile_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -108,17 +109,15 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 150),
+            const SizedBox(height: 100),
 
             Center(
               child: Image.asset(
-                'assets/images/logo.png',
-                width: 200,
-                height: 80,
+                'assets/images/masarilogo.png',
+                width: 500,
+                height: 200,
               ),
             ),
-
-            const SizedBox(height: 16),
 
             const Center(
               child: Text('Welcome Back!', style: TextStyle(fontSize: 30)),
@@ -191,8 +190,7 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 20),
 
             SizedBox(
-              width: double.infinity,
-              height: 44,
+              height: 48,
               child: ElevatedButton(
                 onPressed: _canSubmit ? _submit : null,
                 style: ElevatedButton.styleFrom(

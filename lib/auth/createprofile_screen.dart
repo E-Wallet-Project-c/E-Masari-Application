@@ -90,7 +90,7 @@ class _createprofileScreenState extends State<createprofileScreen> {
 
     return Scaffold(
       body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -101,7 +101,6 @@ class _createprofileScreenState extends State<createprofileScreen> {
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(Icons.arrow_back_ios_rounded, size: 22),
                   padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
                 ),
                 const SizedBox(height: 200),
 
@@ -111,24 +110,22 @@ class _createprofileScreenState extends State<createprofileScreen> {
                 ),
               ],
             ),
-
             const Text(
               'Please enter your personal information to complete your account.',
               style: TextStyle(fontSize: 13, color: Colors.black),
             ),
-            const SizedBox(height: 28),
+            const SizedBox(height: 60),
 
             // Full name
             TextField(
               controller: _nameCtrl,
               textInputAction: TextInputAction.next,
               decoration: const InputDecoration(
-                labelText: 'Full name',
                 hintText: 'Full name',
                 floatingLabelBehavior: FloatingLabelBehavior.always,
               ),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 5),
 
             // Phone: "Phone  +962 | 0 0000 0000"
             TextField(
@@ -152,11 +149,7 @@ class _createprofileScreenState extends State<createprofileScreen> {
                     const SizedBox(width: 8),
                     const Text(
                       '+962',
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                      style: TextStyle(fontSize: 15, color: Colors.black),
                     ),
                     const SizedBox(width: 10),
                     Container(
@@ -174,14 +167,13 @@ class _createprofileScreenState extends State<createprofileScreen> {
               ),
             ),
 
-            const SizedBox(height: 14),
+            const SizedBox(height: 5),
 
             // Date of birth
             TextField(
               controller: _dobCtrl,
               readOnly: true,
               decoration: InputDecoration(
-                labelText: 'Date of birth',
                 floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintText: 'Date of Birth',
                 suffixIcon: IconButton(
@@ -196,11 +188,11 @@ class _createprofileScreenState extends State<createprofileScreen> {
               onTap: _pickDate,
             ),
 
-            const SizedBox(height: 14),
+            const SizedBox(height: 5),
 
             // Country dropdown: "Country | 🇯🇴 Jordan"
             DropdownButtonFormField<String>(
-              value: _selectedCountry,
+              initialValue: _selectedCountry,
               decoration: InputDecoration(
                 prefixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -227,6 +219,7 @@ class _createprofileScreenState extends State<createprofileScreen> {
               items: _countries
                   .map(
                     (c) => DropdownMenuItem<String>(
+                      
                       value: c,
                       child: Row(
                         children: [

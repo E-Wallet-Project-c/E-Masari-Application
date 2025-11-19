@@ -171,7 +171,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).primaryColor;
-
+    final inputBorder = Theme.of(context).inputDecorationTheme.border;
+    final BorderRadius globalRadius = inputBorder is OutlineInputBorder
+        ? inputBorder.borderRadius
+        : BorderRadius.circular(15);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -236,7 +239,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
 
-              const SizedBox(height: _spaceBetweenFields),
+              const SizedBox(height: 25),
 
               TextField(
                 controller: _passCtrl,
@@ -261,7 +264,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
 
-              const SizedBox(height: _spaceBetweenFields),
+              const SizedBox(height: 10),
 
               TextField(
                 controller: _confirmCtrl,
@@ -318,10 +321,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ? const Color(0xFFB0B0B0)
                         : (_canSubmit ? primary : const Color(0xFFB0B0B0)),
                     disabledBackgroundColor: const Color(0xFFB0B0B0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24),
-                    ),
+                    shape: RoundedRectangleBorder(borderRadius: globalRadius),
                   ),
+
                   child: _isSubmitting
                       ? const SizedBox(
                           width: 20,
