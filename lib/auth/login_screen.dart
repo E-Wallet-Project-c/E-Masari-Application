@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'createprofile_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -101,157 +102,162 @@ class _LoginScreenState extends State<LoginScreen> {
         ? inputBorder.borderRadius
         : BorderRadius.circular(15);
 
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const SizedBox(height: 70),
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 70),
 
-              Center(
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  width: 150,
-                  height: 150,
-                  fit: BoxFit.cover,
+            Center(
+              child: Image.asset(
+                'assets/images/logo.png',
+                width: 150,
+                height: 150,
+                fit: BoxFit.cover,
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            const Center(
+              child: Text('Welcome Back!', style: TextStyle(fontSize: 30)),
+            ),
+            const SizedBox(height: 8),
+            const Center(
+              child: Text(
+                'Please enter your credentials to continue.',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 13, color: Colors.black54),
+              ),
+            ),
+
+            const SizedBox(height: 40),
+
+            TextField(
+              controller: _emailCtrl,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: 'Email Address',
+                hintText: 'yourmail@gmail.com',
+                errorText: _emailError,
+                suffixIcon: const Icon(Icons.email_outlined, size: 18),
+              ),
+            ),
+
+            const SizedBox(height: 16),
+
+            TextField(
+              controller: _passCtrl,
+              obscureText: _hidePassword,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                hintText: '********',
+                errorText: _passwordError,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _hidePassword
+                        ? Icons.visibility_off_rounded
+                        : Icons.visibility_outlined,
+                    size: 18,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _hidePassword = !_hidePassword;
+                    });
+                  },
                 ),
               ),
+            ),
 
-              const SizedBox(height: 16),
+            const SizedBox(height: 8),
 
-              const Center(
-                child: Text('Welcome Back!', style: TextStyle(fontSize: 30)),
-              ),
-              const SizedBox(height: 8),
-              const Center(
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  minimumSize: const Size(0, 0),
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                ),
                 child: Text(
-                  'Please enter your credentials to continue.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 13, color: Colors.black54),
+                  'Forgot password?',
+                  style: TextStyle(fontSize: 12, color: primary),
                 ),
               ),
+            ),
 
-              const SizedBox(height: 40),
+            const SizedBox(height: 20),
 
-              TextField(
-                controller: _emailCtrl,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  labelText: 'Email Address',
-                  hintText: 'yourmail@gmail.com',
-                  errorText: _emailError,
-                  suffixIcon: const Icon(Icons.email_outlined, size: 18),
-                ),
-              ),
-
-              const SizedBox(height: 16),
-
-              TextField(
-                controller: _passCtrl,
-                obscureText: _hidePassword,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  hintText: '********',
-                  errorText: _passwordError,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _hidePassword
-                          ? Icons.visibility_off_rounded
-                          : Icons.visibility_outlined,
-                      size: 18,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _hidePassword = !_hidePassword;
-                      });
-                    },
+            SizedBox(
+              width: double.infinity,
+              height: 44,
+              child: ElevatedButton(
+                onPressed: _canSubmit ? _submit : null,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: _isLoading
+                      ? const Color(0xFF005A8D)
+                      : (_canSubmit ? primary : const Color(0xFFE0E0E0)),
+                  disabledBackgroundColor: const Color(0xFFE0E0E0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius:
+                        globalRadius, // نفس الزوايا تبعت الـ TextField
                   ),
                 ),
+                child: _isLoading
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Text(
+                        'Log in',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
               ),
+            ),
 
-              const SizedBox(height: 8),
+            const SizedBox(height: 10),
 
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Don’t have an account? ',
+                  style: TextStyle(fontSize: 12),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const createprofileScreen(),
+                      ),
+                    );
+                  },
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.zero,
                     minimumSize: const Size(0, 0),
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   child: Text(
-                    'Forgot password?',
+                    'Register now',
                     style: TextStyle(fontSize: 12, color: primary),
                   ),
                 ),
-              ),
+              ],
+            ),
 
-              const SizedBox(height: 20),
-
-              SizedBox(
-                width: double.infinity,
-                height: 44,
-                child: ElevatedButton(
-                  onPressed: _canSubmit ? _submit : null,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _isLoading
-                        ? const Color(0xFF005A8D)
-                        : (_canSubmit ? primary : const Color(0xFFE0E0E0)),
-                    disabledBackgroundColor: const Color(0xFFE0E0E0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius:
-                          globalRadius, // نفس الزوايا تبعت الـ TextField
-                    ),
-                  ),
-                  child: _isLoading
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: Colors.white,
-                          ),
-                        )
-                      : const Text(
-                          'Log in',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                ),
-              ),
-
-              const SizedBox(height: 10),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Don’t have an account? ',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      minimumSize: const Size(0, 0),
-                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    ),
-                    child: Text(
-                      'Register now',
-                      style: TextStyle(fontSize: 12, color: primary),
-                    ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(height: 24),
-            ],
-          ),
+            const SizedBox(height: 24),
+          ],
         ),
       ),
     );
